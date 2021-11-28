@@ -1,6 +1,6 @@
 import { Button, FormControl, FormGroup, Input, InputLabel, makeStyles, Typography } from "@material-ui/core";
-import {useState, useEffect} from 'react'
-import { useHistory } from "react-router";
+import  {useState, useEffect} from 'react'
+import { useHistory, useParams } from "react-router";
 const useStyle = makeStyles({
 
     container:{
@@ -16,27 +16,40 @@ const useStyle = makeStyles({
 
  
 
-const AddUser = () =>{
+const EditUser = () =>{
     const [user , setUser] = useState({name:"", username:"", email:"", phone:"" })
     const classes = useStyle();
-    // const history = useHistory();
+    const history = useHistory();
+    const {id} = useParams();
+
+
+    // useEffect(() => {
+    //    loadUserData ();
+    // }, [])
+
+    // const loadUserData = async () => {
+    //     const responce = await getUsers(id);
+            // setUser (responce.data );
+
+    // }
+
 
     const onValueChange= (e) =>{
         
         setUser ({...user , [e.target.name]: e.target.value})
      }
     
-    //  const addUserDetails = async () =>{
-    //         await addUser(user);
-    //         history.push('/AllUsers');
-    //     }
+     const EditUserDetails = async () => {
+        await editUsers (id , user)
+        history.push('')
+     }
 
 
 
         return (
 
             <FormGroup className = {classes.container}>
-                <Typography> Add user </Typography>
+                <Typography> Edit user </Typography>
                 <FormControl >
                     <InputLabel>Name</InputLabel>
                     <Input onChange = {(e)=>{onValueChange(e)}} name='name' />
@@ -55,7 +68,7 @@ const AddUser = () =>{
                     </FormControl>
                     <FormControl>
                     <Button 
-                        // onClick={addUserDetails}
+                        onClick={EditUserDetails}
                         variant = "contained"
                         color = "primary"> 
                         Add User
@@ -65,4 +78,4 @@ const AddUser = () =>{
         );
 }
 
-export default AddUser
+export default EditUser
