@@ -72,7 +72,7 @@ const EditUser = () =>{
                         onClick={EditUserDetails}
                         variant = "contained"
                         color = "primary"> 
-                        Add User
+                        Edit User
                     </Button>
                 </FormControl>
             </FormGroup>

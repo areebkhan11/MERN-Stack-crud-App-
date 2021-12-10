@@ -1,4 +1,4 @@
-import { request } from "express";
+import { request, response } from "express";
 import User from "../model/user-schema.js"
 
 export const getusers = async (request, response) =>{
@@ -39,6 +39,22 @@ export const getuserById = async (request , response)=>{
 }
 
 export const editUser = async (request, response) =>{
-        const user = response.body;
-        const edituser 
+        const user = request.body;
+        
+        const editUser = new User(user);
+        try{
+                await User.updateOne({ _id: request.params.id}, editUser);
+                response.json(editUser);
+        }catch(error) {
+                response.json({message: error.message});
+        }
+}
+
+export const deleteUser = async (request, response)=>{
+        try{
+                await User.deleteOne({_id: request.params.id});
+                response.json("User deleted successfully");
+        }catch(err){
+                response.json({message: err.message})
+        }
 }

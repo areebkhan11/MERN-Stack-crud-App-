@@ -14,13 +14,13 @@ export const addUser = async (user) =>{
 }
 
 export const editUsers = async (id, user) =>{
-    id = id || '';
-    return await axios.get(`${url}/${id}`, user);
+    
+    return await axios.put(`${url}/${id}`, user);
 
 }
 
 export const deleteUser = async (id) =>{
-    id = id || '';
+    
     return await axios.delete(`${url}/${id}`);
 
 }
